@@ -132,6 +132,7 @@ Este documento registra as decisões técnicas mais relevantes tomadas ao longo 
 
 **Consequências**: essa feature deve capturar melhor o conceito de "valor atípico para aquele contexto específico", em vez de um valor atípico em termos absolutos, que mistura escalas incomparáveis entre produtos diferentes.
 
+**Validação posterior**: após a criação da Gold, a feature foi confirmada com dado real. Mediana da razão em transações legítimas: 1,0. Mediana em transações fraudulentas: 1,4113 (aproximadamente 41% acima do valor de referência do produto). O resultado confirma a hipótese levantada na EDA de forma limpa, em uma única variável numérica.
 ---
 
 ## ADR 012: Dois caminhos de deploy planejados (BigQuery ML e endpoint Python), em vez de escolher apenas um

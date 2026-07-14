@@ -2,7 +2,7 @@
 
 Pipeline de detecção de fraude em transações de e-commerce, construído em arquitetura Medallion (Bronze, Silver, Gold) no Google Cloud Platform, com foco em Machine Learning aplicado a prevenção de fraude.
 
-Status atual: EDA concluída. Gold, modelagem e deploy em andamento.
+Status atual: Gold concluída e validada. Modelagem e deploy em andamento.
 
 ## Contexto do problema
 
@@ -108,6 +108,17 @@ EDA conduzida de forma guiada por hipótese de negócio, não exploratória gen�
 | card4 | 100% | Categórica |
 | TransactionAmt (bruto) | 100% | Mantido, mas não como sinal principal isolado |
 | razao_valor_produto (nova) | 100% | Numérica, calculada como TransactionAmt dividido pela mediana histórica do ProductCD correspondente |
+
+### Validação da razao_valor_produto na Gold
+
+Após a criação da tabela Gold, a feature `razao_valor_produto` foi validada com o dado real:
+
+| isFraud | Média da razão | Mediana da razão |
+|---|---|---|
+| 0 (legítima) | 1,805 | 1,0 |
+| 1 (fraude) | 2,315 | 1,4113 |
+
+A mediana das transações legítimas fica exatamente em 1,0, como esperado matematicamente, já que a maioria das transações de qualquer produto é legítima e a mediana de referência foi calculada sobre a base completa. A mediana da fraude, em 1,4113, mostra que a transação fraudulenta típica custa cerca de 41% a mais que o valor de referência do próprio produto, confirmando de forma limpa e em uma única variável o padrão que antes estava mascarado pela mistura de escalas entre produtos diferentes.
 
 ## Modelagem
 
